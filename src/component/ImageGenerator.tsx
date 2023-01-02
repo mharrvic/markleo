@@ -41,7 +41,7 @@ const ImageGenerator = () => {
         />
       )}
 
-      <form className="w-1/2" onSubmit={handleSubmit(onSubmit)}>
+      <form className="w-full md:w-1/2" onSubmit={handleSubmit(onSubmit)}>
         <label htmlFor="generate" className="sr-only">
           Generate
         </label>
