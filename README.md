@@ -24,6 +24,12 @@ This is a demo app that shows how to use Stable Diffusion Model deployed to a Se
 
 ## Demo Video
 
+
+
+https://user-images.githubusercontent.com/15852818/210194714-2d9c6b94-aa55-42c0-95ff-f3cb8d50921a.mp4
+
+
+
 ## Resources
 
 - https://stablediffusion.vercel.app/ 100% inspired by this to help me understand the whole serverless gpu thing with banana.dev
