@@ -1,7 +1,9 @@
+import clsx from "clsx";
 import Image from "next/image";
 import React from "react";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { trpc } from "../utils/trpc";
 
 type Inputs = {
@@ -14,11 +16,17 @@ const ImageGenerator = () => {
 
   const { mutateAsync, isLoading } = trpc.ml.generateImage.useMutation({
     onSuccess: (data) => {
+      toast.remove();
+      toast.success("Successfully Generated! 🎉");
       setImage(data.modelOutputs[0]?.image_base64);
+    },
+    onError: () => {
+      toast.error("Error!");
     },
   });
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    toast.loading("Generating Image with Stable Diffusion...");
     await mutateAsync({ prompt: data.prompt });
   };
 
@@ -28,8 +36,8 @@ const ImageGenerator = () => {
         <Image
           src={`data:image/png;base64,${image}`}
           alt="Generated image"
-          width={256}
-          height={256}
+          width={350}
+          height={350}
         />
       )}
 
@@ -50,9 +58,14 @@ const ImageGenerator = () => {
         <div className="mt-2 flex justify-end">
           <button
             type="submit"
-            className="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            className={clsx(
+              "inline-flex items-center rounded-md border border-transparent px-4 py-2 text-sm font-medium text-white shadow-sm",
+              { "cursor-not-allowed bg-gray-500": isLoading },
+              { "bg-indigo-600": !isLoading }
+            )}
+            disabled={isLoading}
           >
-            Generate
+            {isLoading ? "Generating..." : "Generate"}
           </button>
         </div>
       </form>
