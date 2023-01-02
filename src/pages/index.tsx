@@ -19,8 +19,8 @@ const Home: NextPage = () => {
             <Image
               src="/markleo.png"
               alt="Markleo AI Image Generator Logo"
-              width="100"
-              height="100"
+              width={150}
+              height={150}
             />
           </p>
           <div className="m-3 ml-auto">
