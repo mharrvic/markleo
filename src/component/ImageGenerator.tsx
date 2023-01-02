@@ -36,8 +36,8 @@ const ImageGenerator = () => {
         <Image
           src={`data:image/png;base64,${image}`}
           alt="Generated image"
-          width={350}
-          height={350}
+          width={400}
+          height={400}
         />
       )}
 
